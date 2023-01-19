@@ -29,6 +29,9 @@ extension CarManufacturer: Decodable {
 
 struct ContentView: View {
     
+    @State var selection: Int? = nil
+    @State var isLinkActive = false
+    
     @State var text: String = "Hello There"
     @State var text2: String = ""
     @State var text3: String = ""
@@ -39,48 +42,76 @@ struct ContentView: View {
             
         ]
     
-    
     var body: some View {
-        VStack {
-            Text(labels["header"]!)
-            Spacer()
-                        
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text(text)
-            Text(text2)
-            Text(text3)
-            Button("Press Me") {
-                text = "I'm fetching the things..."
-                fetchFilms {list in
-                    text = list[0].commonName ?? "Oops that did not work..."
-                    text2 = list[0].country ?? ""
-                    text3 = list[0].name ?? ""
+        NavigationStack {
+            VStack {
+                Text(labels["header"]!)
+                Spacer()
+                
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text(text)
+                Text(text2)
+                Text(text3)
+                Button("Press Me") {
+                    text = "I'm fetching the things..."
+                    text2 = ""
+                    text3 = ""
+                    fetch {list in
+                        text = list[0].commonName ?? "Oops that did not work..."
+                        text2 = list[0].country ?? ""
+                        text3 = list[0].name ?? ""
+                    }
                 }
-            }
-            .frame(width: 150, height: 50)
-            .font(.title)
-            .foregroundColor(Color.white)
-            .background(Color.blue)
-            .cornerRadius(10)
-            Spacer()
-            
-            Text(labels["footer"]!)
-        }.onAppear(perform: initialize)
-        .padding()
+                .frame(width: 150, height: 50)
+                .font(.title)
+                .foregroundColor(Color.white)
+                .background(Color.green)
+                .cornerRadius(10)
+                
+                NavigationLink(destination: AnotherView(), tag: 1, selection: $selection) {
+                    Button(action: {
+                        self.selection = 1
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Navigate").foregroundColor(Color.white)
+                            Spacer()
+                        }
+                    }
+                    .frame(width: 150, height: 50)
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                }
+                
+                
+//                NavigationLink(destination: AnotherView()) {
+//                    Text("Do Something")
+//                }
+                
+                Spacer()
+                
+                Text(labels["footer"]!).foregroundColor(.white)
+            }.onAppear(perform: initialize).background(
+                Image("app-background")
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        }
     }
     
-    func initialize() {
+    private func initialize() {
         Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { timer in
             labels["header"]! = "Up and running!"
         }
     }
     
-    func fetchFilms(completionHandler: @escaping ([CarManufacturer]) -> Void) {
-        let tmp = URL(string: "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers")!
-        let queryItem = URLQueryItem(name: "format", value: "json")
-        let url = tmp.appending(queryItems: [queryItem])
+    func fetch(completionHandler: @escaping ([CarManufacturer]) -> Void) {
+        let url = composeUrl(url: "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers")
 
         let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
           if let error = error {
@@ -101,6 +132,12 @@ struct ContentView: View {
         })
         task.resume()
       }
+}
+
+func composeUrl(url: String) -> URL {
+    let tmp = URL(string: url)!
+    let queryItem = URLQueryItem(name: "format", value: "json")
+    return tmp.appending(queryItems: [queryItem])
 }
 
 struct ContentView_Previews: PreviewProvider {

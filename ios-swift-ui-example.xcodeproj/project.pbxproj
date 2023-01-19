@@ -14,6 +14,7 @@
 		00B667C12979287A00EB0E41 /* ios_swift_ui_exampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B667C02979287A00EB0E41 /* ios_swift_ui_exampleTests.swift */; };
 		00B667CB2979287A00EB0E41 /* ios_swift_ui_exampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B667CA2979287A00EB0E41 /* ios_swift_ui_exampleUITests.swift */; };
 		00B667CD2979287A00EB0E41 /* ios_swift_ui_exampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B667CC2979287A00EB0E41 /* ios_swift_ui_exampleUITestsLaunchTests.swift */; };
+		00B667DA2979831B00EB0E41 /* AnotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B667D92979831B00EB0E41 /* AnotherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		00B667C62979287A00EB0E41 /* ios-swift-ui-exampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-swift-ui-exampleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00B667CA2979287A00EB0E41 /* ios_swift_ui_exampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_swift_ui_exampleUITests.swift; sourceTree = "<group>"; };
 		00B667CC2979287A00EB0E41 /* ios_swift_ui_exampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_swift_ui_exampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		00B667D92979831B00EB0E41 /* AnotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				00B667B12979287800EB0E41 /* ContentView.swift */,
 				00B667B32979287A00EB0E41 /* Assets.xcassets */,
 				00B667B52979287A00EB0E41 /* Preview Content */,
+				00B667D92979831B00EB0E41 /* AnotherView.swift */,
 			);
 			path = "ios-swift-ui-example";
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B667DA2979831B00EB0E41 /* AnotherView.swift in Sources */,
 				00B667B22979287800EB0E41 /* ContentView.swift in Sources */,
 				00B667B02979287800EB0E41 /* ios_swift_ui_exampleApp.swift in Sources */,
 			);
