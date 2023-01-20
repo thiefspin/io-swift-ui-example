@@ -30,7 +30,6 @@ extension CarManufacturer: Decodable {
 struct ContentView: View {
     
     @State var selection: Int? = nil
-    @State var isLinkActive = false
     
     @State var text: String = "Hello There"
     @State var text2: String = ""
@@ -70,7 +69,7 @@ struct ContentView: View {
                 .background(Color.green)
                 .cornerRadius(10)
                 
-                NavigationLink(destination: AnotherView(), tag: 1, selection: $selection) {
+                NavigationLink(destination: AnotherView(selection: $selection), tag: 1, selection: $selection) {
                     Button(action: {
                         self.selection = 1
                     }) {
